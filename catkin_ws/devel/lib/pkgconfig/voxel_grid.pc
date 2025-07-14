@@ -1,8 +1,0 @@
-prefix=/home/orangepi/catkin_ws/devel
-
-Name: voxel_grid
-Description: Description of voxel_grid
-Version: 1.17.3
-Cflags: -I/home/orangepi/catkin_ws/src/algorithm/navigation/navigation/voxel_grid/include
-Libs: -L${prefix}/lib -lvoxel_grid
-Requires: roscpp

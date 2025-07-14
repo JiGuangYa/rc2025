@@ -1,8 +1,0 @@
-prefix=/home/orangepi/mission_ws/devel
-
-Name: wp_nav_pid
-Description: Description of wp_nav_pid
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

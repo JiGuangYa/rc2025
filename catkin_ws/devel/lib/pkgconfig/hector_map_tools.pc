@@ -1,8 +1,0 @@
-prefix=/home/orangepi/catkin_ws/devel
-
-Name: hector_map_tools
-Description: Description of hector_map_tools
-Version: 0.5.2
-Cflags: -I/home/orangepi/catkin_ws/src/algorithm/slam/Hector/hector_slam/hector_map_tools/include -I/usr/include/eigen3
-Libs: -L${prefix}/lib 
-Requires: nav_msgs

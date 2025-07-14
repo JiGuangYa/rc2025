@@ -1,0 +1,29 @@
+# ROS Catkin build, devel, and install spaces
+build/
+devel/
+install/
+logs/
+
+# ROS Catkin generated files
+.catkin_workspace
+.catkin_tools/
+
+# General ignores
+*.swp
+*~
+*.pyc
+*.log
+*.tar.gz
+*.deb
+*.orig
+
+# IDE specific
+.vscode/
+.idea/
+*.user
+*.user.*
+CMakeLists.txt.user
+compile_commands.json
+
+# Ignore test results
+test_results/

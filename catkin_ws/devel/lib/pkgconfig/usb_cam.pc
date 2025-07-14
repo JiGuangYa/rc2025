@@ -1,8 +1,0 @@
-prefix=/home/orangepi/catkin_ws/devel
-
-Name: usb_cam
-Description: Description of usb_cam
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: camera_info_manager cv_bridge image_transport roscpp std_msgs

@@ -1,8 +1,0 @@
-prefix=/home/orangepi/catkin_ws/devel
-
-Name: deepseek
-Description: Description of deepseek
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

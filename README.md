@@ -48,6 +48,8 @@
 
 请按顺序编译两个工作空间。首先编译 `catkin_ws`，因为它包含了 `mission_ws` 所需的基础消息和库。
 
+**重要提示**: 本仓库使用 `.gitignore` 文件忽略了 `build/` 和 `devel/` 目录。在克隆项目后，您需要首先在本地编译工作空间，以生成这些必要的目录，然后才能设置环境和运行节点。
+
 **编译 `catkin_ws`:**
 ```bash
 cd /path/to/your/project/catkin_ws
