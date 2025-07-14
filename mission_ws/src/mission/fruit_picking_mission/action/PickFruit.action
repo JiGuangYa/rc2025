@@ -1,0 +1,9 @@
+# Goal: what fruit to pick
+string fruit_type
+---
+# Result: whether the picking was successful
+bool success
+string message
+---
+# Feedback: current status of the picking process
+string status

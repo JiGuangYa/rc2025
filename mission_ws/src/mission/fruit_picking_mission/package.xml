@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>fruit_picking_mission</name>
+  <version>0.0.1</version>
+  <description>Task management for the fruit picking mission</description>
+  <maintainer email="gemini@example.com">Gemini</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>user_msgs</build_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>user_msgs</exec_depend>
+
+  <build_depend>actionlib</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <exec_depend>actionlib</exec_depend>
+  <exec_depend>actionlib_msgs</exec_depend>
+</package>
