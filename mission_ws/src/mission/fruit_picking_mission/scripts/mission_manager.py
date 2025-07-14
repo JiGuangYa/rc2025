@@ -5,10 +5,10 @@ import rospy
 import actionlib
 from fruit_picking_mission.msg import PickFruitAction
 from user_msgs.msg import ObjDets
+from servo_control.srv import SetAngle
 
 # 假设的服务，您需要实现它们
 # from some_arm_pkg.srv import MoveArm, Gripper
-# from some_servo_pkg.srv import SetAngle
 
 class MissionManager:
     def __init__(self):
@@ -29,6 +29,12 @@ class MissionManager:
         # 创建Action Server
         self._as = actionlib.SimpleActionServer('pick_fruit', PickFruitAction, execute_cb=self.execute_cb, auto_start=False)
         self._as.start()
+
+        # 创建服务客户端
+        rospy.loginfo("Waiting for servo service...")
+        rospy.wait_for_service('/set_servo_angle')
+        self.set_servo_angle_client = rospy.ServiceProxy('/set_servo_angle', SetAngle)
+        rospy.loginfo("Servo service connected.")
 
         rospy.loginfo("Mission Manager is ready.")
 
@@ -60,7 +66,16 @@ class MissionManager:
         if goal.fruit_type in self.bucket_positions:
             angle = self.bucket_positions[goal.fruit_type]
             rospy.loginfo(f"Rotating bucket to {angle} degrees for {goal.fruit_type}")
-            # set_servo_angle_client(angle)
+            try:
+                response = self.set_servo_angle_client(angle)
+                if not response.success:
+                    rospy.logerr("Failed to set servo angle.")
+                    self._as.set_aborted(text="Failed to control servo.")
+                    return
+            except rospy.ServiceException as e:
+                rospy.logerr(f"Service call failed: {e}")
+                self._as.set_aborted(text="Failed to connect to servo service.")
+                return
         else:
             rospy.logwarn(f"No bucket position defined for {goal.fruit_type}")
 

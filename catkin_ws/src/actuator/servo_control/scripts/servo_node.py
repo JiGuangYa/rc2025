@@ -2,40 +2,44 @@
 # -*- coding: utf-8 -*-
 
 import rospy
-from std_msgs.msg import Float64
+from servo_control.srv import SetAngle, SetAngleResponse
 
-def angle_callback(msg):
+def handle_set_angle(req):
     """
-    接收到舵机角度指令时的回调函数。
+    处理设置舵机角度的服务请求。
     """
-    # 获取角度值 (单位: 度)
-    angle_degrees = msg.data
-    
-    rospy.loginfo("接收到舵机角度指令: {:.2f} 度".format(angle_degrees))
-    
+    angle_degrees = req.angle
+    rospy.loginfo(f"接收到舵机角度指令: {angle_degrees:.2f} 度")
+
     # --- 在这里添加您的硬件控制逻辑 ---
     # 例如，将角度值转换为PWM信号并发送给舵机控制器
-    # pwm_value = convert_angle_to_pwm(angle_degrees)
-    # send_to_servo_controller(pwm_value)
+    # success = send_to_servo_controller(angle_degrees)
     # ----------------------------------
+    
+    # 模拟一个成功的操作
+    success = True 
 
-def servo_controller_node():
+    if success:
+        rospy.loginfo("舵机角度设置成功。")
+        return SetAngleResponse(success=True, message="Angle set successfully.")
+    else:
+        rospy.logerr("舵机角度设置失败。")
+        return SetAngleResponse(success=False, message="Failed to set angle.")
+
+def servo_service_node():
     """
-    初始化ROS节点并订阅话题。
+    初始化ROS节点并启动服务。
     """
-    # 初始化节点
-    rospy.init_node('servo_controller', anonymous=True)
+    rospy.init_node('servo_service_node')
     
-    # 订阅舵机角度指令话题
-    rospy.Subscriber("/servo_angle_command", Float64, angle_callback)
+    # 创建一个名为 /set_servo_angle 的服务
+    s = rospy.Service('/set_servo_angle', SetAngle, handle_set_angle)
     
-    rospy.loginfo("舵机控制节点已启动，等待角度指令...")
-    
-    # 保持节点运行
+    rospy.loginfo("舵机控制服务已就绪，等待请求...")
     rospy.spin()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        servo_controller_node()
+        servo_service_node()
     except rospy.ROSInterruptException:
         pass

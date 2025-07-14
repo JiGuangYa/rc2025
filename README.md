@@ -121,9 +121,15 @@ roslaunch mission mission_control.launch
 
 ### 3. 舵机控制与配置
 
-舵机用于旋转水果桶，确保不同种类的水果放入对应的格子。控制逻辑位于 `mission_manager.py` 中。
+舵机用于旋转水果桶，确保不同种类的水果放入对应的格子。我们已经将其重构为更可靠的**ROS服务**。
 
-- **配置文件**: 在 `mission_manager.py` 脚本内部，有一个名为 `bucket_positions` 的字典，它定义了**水果类型**到**舵机旋转角度**的映射关系。
+- **服务定义**: 在 `catkin_ws/src/actuator/servo_control/srv/` 目录下，定义了 `SetAngle.srv` 服务。它接收一个 `float64` 类型的目标角度，并返回一个 `bool` 类型的 `success` 标志。
+
+- **服务节点**: `servo_control` 包中的 `servo_node.py` 脚本提供 `/set_servo_angle` 服务。它负责接收角度指令并（在实际硬件上）驱动舵机。
+
+- **客户端**: `mission_manager.py` 作为客户端，在需要放置水果时，会调用 `/set_servo_angle` 服务，并等待其完成。这确保了桶已经旋转到位，然后才进行下一步的放置动作。
+
+- **配置**: 水果类型到舵机角度的映射关系仍然在 `mission_manager.py` 的 `bucket_positions` 字典中配置。
 
   ```python
   self.bucket_positions = {
@@ -134,23 +140,22 @@ roslaunch mission mission_control.launch
   }
   ```
 
-- **控制流程**: 当 `mission_manager` 接收到抓取某种水果的任务时，在机械臂将水果抓取到桶上方后，它会查询此字典，并调用舵机控制服务，将桶旋转到正确的角度，然后释放水果。
-
-- **待办事项**: 舵机控制目前是**伪代码**。开发者需要：
-  1. 在 `catkin_ws/src/actuator/servo_control` 中实现一个ROS服务，该服务可以接收一个角度值并控制舵机转动。
-  2. 在 `mission_manager.py` 中，取消相关代码的注释，并调用该服务。
-
 ### 4. 如何运行
 
-1.  **编译工作空间**: 确保 `mission_ws` 已被成功编译 (`catkin_make`)。
-2.  **启动任务管理器**:
+1.  **编译工作空间**: 确保 `catkin_ws` 和 `mission_ws` 都已成功编译 (`catkin_make`)。
+2.  **启动舵机服务**:
     ```bash
-    # 确保已 source mission_ws/devel/setup.bash
+    # 在一个终端中 (source catkin_ws)
+    rosrun servo_control servo_node.py
+    ```
+3.  **启动任务管理器**:
+    ```bash
+    # 在另一个终端中 (source mission_ws)
     rosrun fruit_picking_mission mission_manager.py
     ```
-3.  **发送测试指令**:
+4.  **发送测试指令**:
     ```bash
-    # 在新终端中
+    # 在第三个终端中
     rosrun actionlib axclient.py /pick_fruit
     ```
     在弹出的窗口中，输入目标，例如 `fruit_type: "apple"`，然后点击 “Send Goal”。

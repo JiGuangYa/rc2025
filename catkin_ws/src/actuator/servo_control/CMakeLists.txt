@@ -4,6 +4,17 @@ project(servo_control)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
+  message_generation
+)
+
+add_service_files(
+  FILES
+  SetAngle.srv
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
 )
 
 catkin_package(
