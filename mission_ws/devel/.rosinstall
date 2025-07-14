@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/orangepi/mission_ws/devel/setup.sh

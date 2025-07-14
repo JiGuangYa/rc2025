@@ -1,0 +1,17 @@
+pointcloud_roi:  # 点云z轴(高度方向)兴趣范围
+
+  min_height: -0.2  # m
+  max_height:  0.3  # m
+
+  # 障碍物判断
+  debug: false
+  obstacle_ahead_x: 0.3   # m  障碍物距离 (车头方向) 最近检测距离>=0.1m
+  obstacle_ahead_y: 0.3  # m  障碍物检测域 (车身左右各 obstacle_ahead_y m)
+
+  obstacle_min_pts: 5  # 认为是障碍物的最少点个数
+  obstacle_max_pts: 100  # 认为是障碍物的提前退出判断的个数
+
+  pc2_sub_name: /livox/lidar  # 订阅到原始点云话题名
+  pc2_roi_pub_name: /livox/lidar_roi  # 发布的roi操作后的点云话题名
+  pc2_obs_pub_name: /livox/obstacle  # 发布的障碍物的点云话题名
+  bool_obs_pub_name: /obstacle_ahead  # 发布是否有障碍物的话题名

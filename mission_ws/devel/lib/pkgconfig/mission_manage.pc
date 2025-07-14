@@ -1,0 +1,8 @@
+prefix=/home/orangepi/mission_ws/devel
+
+Name: mission_manage
+Description: Description of mission_manage
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,2 @@
+set(user_msgs_MESSAGE_FILES "/home/orangepi/catkin_ws/src/user_msgs/msg/CannonStatus.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/CarCmd.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/ExitCondition.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/GimbalPoseDeg.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/ObjBbox.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/ObjDet.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/ObjDets.msg;/home/orangepi/catkin_ws/src/user_msgs/msg/PID.msg")
+set(user_msgs_SERVICE_FILES "")

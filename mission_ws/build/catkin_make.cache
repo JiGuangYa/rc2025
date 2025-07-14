@@ -1,0 +1,2 @@
+mission/car_localization:mission/mission_manage:mission/wp_nav_pid
+-DCATKIN_DEVEL_PREFIX=/home/orangepi/mission_ws/devel -DCMAKE_INSTALL_PREFIX=/home/orangepi/mission_ws/install -G Unix Makefiles

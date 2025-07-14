@@ -1,0 +1,8 @@
+prefix=/home/orangepi/mission_ws/install
+
+Name: car_localization
+Description: Description of car_localization
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

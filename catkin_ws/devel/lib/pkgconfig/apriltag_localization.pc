@@ -1,0 +1,8 @@
+prefix=/home/orangepi/catkin_ws/devel
+
+Name: apriltag_localization
+Description: Description of apriltag_localization
+Version: 0.0.0
+Cflags: -I/home/orangepi/catkin_ws/src/algorithm/detection/apriltag_localization/include -I/usr/local/include
+Libs: -L${prefix}/lib /usr/local/lib/libapriltag.so
+Requires: roscpp std_msgs cv_bridge image_transport tf2 tf2_ros geometry_msg

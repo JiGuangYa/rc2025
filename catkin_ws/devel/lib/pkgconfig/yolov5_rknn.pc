@@ -1,0 +1,8 @@
+prefix=/home/orangepi/catkin_ws/devel
+
+Name: yolov5_rknn
+Description: Description of yolov5_rknn
+Version: 0.0.0
+Cflags: -I/home/orangepi/catkin_ws/src/algorithm/detection/yolov5_rknn/include
+Libs: -L${prefix}/lib -lyolov5_rknn
+Requires: roscpp rospy std_msgs user_msgs

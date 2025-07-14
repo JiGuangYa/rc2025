@@ -1,0 +1,11 @@
+<launch>
+  <!--添加底盘至雷达的TF转换-->
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser"
+    args="0.0 0.0 0.0 0.0 0.0  0.0 /base_link /laser 40" />
+  <!--发布激光雷达里程计-->
+  <include file="$(find rf2o_laser_odometry)/launch/rf2o_laser_odometry.launch" />
+  <!--Karto建图-->
+  <include file="$(find slam_karto)/launch/karto_slam.launch" />
+  <!--打开Rviz-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam_karto)/rviz/karto.rviz" />
+</launch>

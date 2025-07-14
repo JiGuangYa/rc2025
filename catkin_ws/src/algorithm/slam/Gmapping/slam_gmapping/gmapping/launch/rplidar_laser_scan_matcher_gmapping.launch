@@ -1,0 +1,12 @@
+<launch>
+  <!--添加底盘至雷达的TF转换-->
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" 
+    args="0.0 0.0 0.0 0.0 0.0 0.0 /base_link /laser 40" />
+  <!--开始激光扫描匹配-->
+  <include file="$(find laser_scan_matcher)/launch/laser_scan_matcher.launch" />
+  <!--Gmapping建图-->
+  <include file="$(find gmapping)/launch/laser_scan_matcher_gmapping.launch" />
+  <!--打开Rviz-->
+  <node pkg="rviz" type="rviz" name="rviz" 
+    args="-d $(find gmapping)/rviz/laser_scan_matcher_gmapping.rviz"/>
+</launch>

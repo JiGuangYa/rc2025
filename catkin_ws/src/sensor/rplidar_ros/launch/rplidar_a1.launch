@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+    <rosparam command="load" file="$(find user_params)/params/rplidar_a1_config.yaml" />
+        
+    <node pkg="rplidar_ros"  type="rplidarNode" name="rplidarNode" output="screen" />
+    
+</launch>
